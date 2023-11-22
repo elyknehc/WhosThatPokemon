@@ -10,10 +10,10 @@ export default function Home() {
 
 	return (
 		<main className="p-4">
-			<div className="flex justify-center">
-				<h1> Who's that Pokemon? </h1>
+			<div className="flex justify-center text-center">
 				<div>
-					<Filter />
+					<h1> Who's that Pokemon? </h1>
+					{/* <Filter /> */}
 					<PokemonCard />
 				</div>
 			</div>
