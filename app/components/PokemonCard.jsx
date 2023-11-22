@@ -9,6 +9,9 @@ const PokemonCard = () => {
 		<div>
 			{/* <Image src={pokemon} width="100" height="100" /> */}
 			PokemonCard
+			<div>
+				<button onClick={getPokemon}>Get Pokemon</button>
+			</div>
 		</div>
 	);
 };
