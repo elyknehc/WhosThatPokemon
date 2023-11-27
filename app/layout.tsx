@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<title> Who's That Pokemon? </title>
+			<title> Who's That Pokémon? </title>
 			<body className={inter.className}>
 				<AuthContextProvider>
 					<Navbar />

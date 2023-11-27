@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Pokeball from "./Pokeball.jpg";
 import getPokemon from "../api/pokemon";
@@ -10,6 +10,10 @@ const PokemonCard = () => {
 	const [pokemonImg, setPokemonImg] = useState(Pokeball); // Default Image will be a pokeball
 	const [pokemonName, setPokemonName] = useState(null);
 	const [loading, setLoading] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
+	const [correct, setCorrect] = useState(null);
+	const [score, setScore] = useState(0);
+	const [start, setStart] = useState(true);
 
 	const handleGetPokemon = async () => {
 		setLoading(true);
@@ -22,9 +26,43 @@ const PokemonCard = () => {
 		}
 		setLoading(false);
 	};
+
+	const handleModal = () => {
+		setIsVisible(true);
+		setTimeout(() => {
+			setIsVisible(false);
+		}, 2000);
+	};
+
+	const handleCorrectGuess = async () => {
+		setCorrect(true);
+		await handleModal();
+		setTimeout(() => {
+			handleGetPokemon();
+		}, 2000);
+	};
+
+	const handleWrongGuess = async () => {
+		setCorrect(false);
+		await handleModal();
+		setTimeout(() => {
+			handleGetPokemon();
+		}, 2000);
+	};
+
+	const handleStart = () => {
+		setStart(false);
+		handleGetPokemon();
+	};
+
+	// useEffect(() => {}, [isVisible]);
+
 	return (
 		<div>
 			<div>
+				{isVisible ? (
+					<Modal pokemonName={pokemonName} result={correct} />
+				) : null}
 				{loading ? (
 					<div>
 						<h1> Loading... </h1>
@@ -40,7 +78,7 @@ const PokemonCard = () => {
 									className="text-center"
 									onChange={(e) =>
 										e.target.value.toLowerCase() === pokemonName
-											? handleGetPokemon()
+											? handleCorrectGuess()
 											: null
 									}
 								/>
@@ -51,7 +89,11 @@ const PokemonCard = () => {
 				)}
 
 				<div>
-					<button onClick={handleGetPokemon}> Reveal Answer </button>
+					{start ? (
+						<button onClick={handleStart}> Start Game </button>
+					) : (
+						<button onClick={handleWrongGuess}> Reveal Answer </button>
+					)}
 				</div>
 			</div>
 		</div>
