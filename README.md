@@ -1,4 +1,5 @@
-Who's that Pokemon:
+Who's that Pokemon: Based off the TV Show!
+Sprites and names generated with: https://pokeapi.co/
 Sign in to share your stats and keep track of your stats!
 Deployed with Vercel.
-Build with Next.js, Firebase and Tailwind.
+Built with Next.js, Firebase and Tailwind.
