@@ -30,14 +30,27 @@ const PokemonCard = () => {
 					</div>
 				) : (
 					<div>
-						<img src={pokemonImg}></img> <p> {pokemonName} </p>{" "}
+						<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
+							<img className="w-72 h-72" src={pokemonImg} alt="Pokemon" />
+							<div>
+								<input
+									type="text"
+									placeholder="Guess the Pokemon!"
+									className="text-center"
+									onChange={(e) =>
+										e.target.value.toLowerCase() === pokemonName
+											? handleGetPokemon()
+											: null
+									}
+								/>
+								{pokemonName}
+							</div>
+						</div>
 					</div>
 				)}
+
 				<div>
-					<button onClick={handleGetPokemon}>Get Pokemon</button>
-				</div>
-				<div>
-					<button> Reveal Answer </button>
+					<button onClick={handleGetPokemon}> Reveal Answer </button>
 				</div>
 			</div>
 		</div>
