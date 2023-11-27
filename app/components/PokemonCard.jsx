@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Pokeball from "./Pokeball.jpg";
 import getPokemon from "../api/pokemon";
+import Modal from "./Modal";
 
 const PokemonCard = () => {
 	const [pokemonImg, setPokemonImg] = useState(Pokeball); // Default Image will be a pokeball
