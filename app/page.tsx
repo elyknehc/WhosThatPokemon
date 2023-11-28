@@ -13,7 +13,6 @@ export default function Home() {
 				<div>
 					<h1
 						style={{
-							color: "#FFCB05",
 							fontFamily: "Arial",
 							fontSize: "24px",
 							fontWeight: "bold",
