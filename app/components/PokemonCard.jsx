@@ -5,7 +5,8 @@ import Image from "next/image";
 import Pokeball from "./Pokeball.jpg";
 import getPokemon from "../api/pokemon";
 import Modal from "./Modal";
-
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 const PokemonCard = () => {
 	const [pokemonImg, setPokemonImg] = useState(Pokeball); // Default Image will be a pokeball
 	const [pokemonName, setPokemonName] = useState(null);
@@ -14,6 +15,18 @@ const PokemonCard = () => {
 	const [correct, setCorrect] = useState(null);
 	const [score, setScore] = useState(0);
 	const [start, setStart] = useState(true);
+
+	//Add item to DB
+	const addItem = async (e) => {
+		e.preventDefault();
+
+		// await addDoc(collection(db, 'pokemon'),) {
+
+		// }
+	};
+	//Read item from DB
+
+	//Delete item from DB
 
 	const handleGetPokemon = async () => {
 		setLoading(true);
