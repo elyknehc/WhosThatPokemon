@@ -9,6 +9,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 const PokemonCard = () => {
 	const [pokemonImg, setPokemonImg] = useState(Pokeball); // Default Image will be a pokeball
+	const [pokemonImg2, setPokemonImg2] = useState(null);
 	const [pokemonName, setPokemonName] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
@@ -33,6 +34,7 @@ const PokemonCard = () => {
 		try {
 			const pokemon = await getPokemon();
 			setPokemonImg(pokemon[1]);
+			setPokemonImg2(pokemon[2]);
 			setPokemonName(pokemon[0]);
 		} catch (error) {
 			console.log(error);
@@ -72,7 +74,11 @@ const PokemonCard = () => {
 		<div>
 			<div>
 				{isVisible ? (
-					<Modal pokemonName={pokemonName} result={correct} />
+					<Modal
+						pokemonName={pokemonName}
+						result={correct}
+						pokemonImg2={pokemonImg2}
+					/>
 				) : null}
 				{loading ? (
 					<div>

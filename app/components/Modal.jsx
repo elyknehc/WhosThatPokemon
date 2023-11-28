@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
-const Modal = ({ pokemonName, result }) => {
+const Modal = ({ pokemonName, result, pokemonImg2 }) => {
 	const [countdown, setCountdown] = useState(2);
 
 	useEffect(() => {
@@ -39,6 +40,7 @@ const Modal = ({ pokemonName, result }) => {
 						</h1>
 					</div>
 				)}
+				<Image src={pokemonImg2} width={150} height={150} alt="pkmn" />
 				New Pokemon in {countdown} seconds...
 			</div>
 		</div>
