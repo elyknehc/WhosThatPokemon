@@ -55,8 +55,6 @@ const PokemonCard = () => {
 		handleGetPokemon();
 	};
 
-	// useEffect(() => {}, [isVisible]);
-
 	return (
 		<div>
 			<div>
@@ -70,7 +68,7 @@ const PokemonCard = () => {
 				) : (
 					<div>
 						<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
-							<img className="w-72 h-72" src={pokemonImg} alt="Pokemon" />
+							<Image height={300} width={300} src={pokemonImg} alt="Pokemon" />
 							<div>
 								<input
 									type="text"
