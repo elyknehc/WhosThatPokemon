@@ -68,7 +68,7 @@ const PokemonCard = () => {
 				) : (
 					<div>
 						<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
-							<Image height={300} width={300} src={pokemonImg} alt="Pokemon" />
+							<Image height={500} width={500} src={pokemonImg} alt="Pokemon" />
 							<div>
 								<input
 									type="text"

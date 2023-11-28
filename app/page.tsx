@@ -5,16 +5,26 @@ import PokemonCard from "./components/PokemonCard";
 import { useState } from "react";
 
 export default function Home() {
-	const [pokemon, setPokemon] = useState(null);
-	const [pokemonName, setPokemonName] = useState(null);
+	const [filter, setFilter] = useState("");
 
 	return (
 		<main className="p-4">
 			<div className="flex justify-center text-center">
 				<div>
-					<h1> Who's that Pokemon? </h1>
-					{/* <Filter /> */}
-					<PokemonCard />
+					<h1
+						style={{
+							color: "#FFCB05",
+							fontFamily: "Arial",
+							fontSize: "24px",
+							fontWeight: "bold",
+						}}
+					>
+						Who's that Pokemon?
+					</h1>
+					<div className="flex">
+						<Filter setFilter={setFilter} />
+						<PokemonCard filter={filter} />
+					</div>
 				</div>
 			</div>
 		</main>

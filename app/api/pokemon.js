@@ -7,9 +7,9 @@ export default async function getPokemon(filter) {
 		const response = await axios.get(
 			`https://pokeapi.co/api/v2/pokemon/${filter}`
 		);
-		const name = await response.data.species.name;
-		const sprite = await response.data.sprites.front_default;
-		// console.log(data.forms[0].name); // bulbasaur
+		const name = response.data.species.name;
+		const sprite =
+			response.data.sprites.other["official-artwork"].front_default;
 		const res = [name, sprite];
 		console.log(res);
 		return res;
