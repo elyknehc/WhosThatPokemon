@@ -37,6 +37,14 @@ const Navbar = () => {
 				<li className="mr-6">
 					<Link href="/">Home</Link>
 				</li>
+				<li className="mr-6">
+					<Link
+						href="/profile
+					"
+					>
+						Saved Pokemon
+					</Link>
+				</li>
 			</ul>
 
 			{loading ? null : !user ? (

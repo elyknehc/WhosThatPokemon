@@ -7,6 +7,8 @@ import getPokemon from "../api/pokemon";
 import Modal from "./Modal";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { UserAuth } from "../context/AuthContext";
+
 const PokemonCard = () => {
 	const [pokemonImg, setPokemonImg] = useState(Pokeball); // Default Image will be a pokeball
 	const [pokemonName, setPokemonName] = useState(null);
@@ -16,13 +18,22 @@ const PokemonCard = () => {
 	const [score, setScore] = useState(0);
 	const [start, setStart] = useState(true);
 
+	//Auth
+	const { user } = UserAuth();
+
 	//Add item to DB
 	const addItem = async (e) => {
 		e.preventDefault();
-
-		// await addDoc(collection(db, 'pokemon'),) {
-
-		// }
+		try {
+			//Add the current pokemon name and image to the database associated with the user's ID
+			await addDoc(collection(db, "savedPokemon"), {
+				name: pokemonName,
+				image: pokemonImg,
+				user: user.uid,
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	//Read item from DB
 
@@ -103,7 +114,15 @@ const PokemonCard = () => {
 					{start ? (
 						<button onClick={handleStart}> Start Game </button>
 					) : (
-						<button onClick={handleWrongGuess}> Reveal Answer </button>
+						<div>
+							<div>
+								<button onClick={handleWrongGuess}> Reveal Answer </button>
+							</div>
+							<div>
+								<button onClick={addItem}> Save Pokemon </button>
+							</div>
+							<div> {score} </div>
+						</div>
 					)}
 				</div>
 			</div>
