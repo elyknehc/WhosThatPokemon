@@ -10,8 +10,8 @@ export default async function getPokemon(filter) {
 		const name = response.data.species.name;
 		const sprite =
 			response.data.sprites.other["official-artwork"].front_default;
-		const res = [name, sprite];
-		console.log(res);
+		const sprite2 = response.data.sprites.front_default;
+		const res = [name, sprite, sprite2];
 		return res;
 	} catch (error) {
 		console.log(error);
