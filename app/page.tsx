@@ -5,7 +5,7 @@ import PokemonCard from "./components/PokemonCard";
 import { useState } from "react";
 
 export default function Home() {
-	const [filter, setFilter] = useState("");
+	const [filter, setFilter] = useState(null);
 
 	return (
 		<main className="p-4">

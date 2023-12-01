@@ -9,7 +9,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
 
-const PokemonCard = () => {
+const PokemonCard = ({ filter }) => {
 	const [pokemonImg, setPokemonImg] = useState(Pokeball); // Default Image will be a pokeball
 	const [pokemonImg2, setPokemonImg2] = useState(null);
 	const [pokemonName, setPokemonName] = useState(null);
