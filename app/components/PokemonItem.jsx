@@ -13,7 +13,6 @@ const PokemonItem = ({ id, name, image, deletePokemon }) => {
 					<button onClick={handleDelete}>Delete</button>
 					<Image src={image} width={100} height={100} alt="Pokemon Image" />
 					<p>{name}</p>
-					{id}
 				</div>
 			</div>
 		</div>
