@@ -122,7 +122,6 @@ const PokemonCard = ({ filter }) => {
 											: null
 									}
 								/>
-								{pokemonName}
 							</div>
 						</div>
 					</div>
