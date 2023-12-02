@@ -9,7 +9,7 @@ import {
 	where,
 	onSnapshot,
 	doc,
-	delteDoc,
+	deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Image from "next/image";
@@ -22,9 +22,7 @@ const page = () => {
 
 	const deletePokemon = async (id) => {
 		try {
-			const docRef = doc(db, "savedPokemon", id);
-			await deleteDoc(docRef);
-			setSavedPokemon(savedPokemon.filter((pokemon) => pokemon.id !== id));
+			await deleteDoc(doc(db, "savedPokemon", id));
 		} catch (error) {
 			console.error("Error deleting Pokemon:", error);
 		}
@@ -35,8 +33,9 @@ const page = () => {
 			await new Promise((resolve) => setTimeout(resolve, 50));
 			setLoading(false);
 		};
+
 		checkAuthentication();
-	}, [user]);
+	}, [user, savedPokemon]);
 
 	useEffect(() => {
 		const fetchSavedPokemon = async () => {
@@ -49,7 +48,9 @@ const page = () => {
 					const unsubscribe = onSnapshot(q, (querySnapshot) => {
 						const pokemon = [];
 						querySnapshot.forEach((doc) => {
-							pokemon.push(doc.data());
+							const pokemonData = doc.data();
+							const pokemonWithId = { ...pokemonData, id: doc.id };
+							pokemon.push(pokemonWithId);
 						});
 						setSavedPokemon(pokemon);
 					});
@@ -74,6 +75,7 @@ const page = () => {
 						{savedPokemon.map((pokemon) => (
 							<PokemonItem
 								key={pokemon.id}
+								id={pokemon.id}
 								name={pokemon.name}
 								image={pokemon.image}
 								deletePokemon={deletePokemon}

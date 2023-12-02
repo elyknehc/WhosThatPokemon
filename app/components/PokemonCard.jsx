@@ -5,7 +5,14 @@ import Image from "next/image";
 import Pokeball from "./Pokeball.jpg";
 import getPokemon from "../api/pokemon";
 import Modal from "./Modal";
-import { collection, addDoc, getDoc, doc } from "firebase/firestore";
+import {
+	collection,
+	addDoc,
+	getDoc,
+	doc,
+	setDoc,
+	DocumentReference,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
 
@@ -33,16 +40,16 @@ const PokemonCard = ({ filter }) => {
 				return;
 			}
 			// Add the current pokemon name and image to the database associated with the user's ID
-			await addDoc(collection(db, "savedPokemon"), {
+			const newDocRef = await addDoc(collection(db, "savedPokemon"), {
 				name: pokemonName,
 				image: pokemonImg,
 				user: user.uid,
-				id: user.uid + pokemonName,
 			});
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
 	const handleGetPokemon = async () => {
 		setLoading(true);
 		try {
