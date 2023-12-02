@@ -10,6 +10,7 @@ import {
 	onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import Image from "next/image";
 
 const page = () => {
 	const { user } = UserAuth();
@@ -25,19 +26,22 @@ const page = () => {
 	}, [user]);
 
 	useEffect(() => {
-		const q = query(
-			collection(db, "savedPokemon")
-			// where("user", "==", user.uid)
-		);
-		const unsubscribe = onSnapshot(q, (querySnapshot) => {
-			const pokemon = [];
-			querySnapshot.forEach((doc) => {
-				pokemon.push(...doc.data());
+		const fetchSavedPokemon = async () => {
+			const q = query(
+				collection(db, "savedPokemon")
+				// where("user", "==", user.uid)
+			);
+			const unsubscribe = onSnapshot(q, (querySnapshot) => {
+				const pokemon = [];
+				querySnapshot.forEach((doc) => {
+					pokemon.push(doc.data());
+				});
+				setSavedPokemon(pokemon);
 			});
-			setSavedPokemon(pokemon);
-		});
-		console.log(savedPokemon);
-		return () => unsubscribe();
+			return unsubscribe;
+		};
+
+		fetchSavedPokemon();
 	}, [user]);
 
 	return (
@@ -49,10 +53,16 @@ const page = () => {
 			) : (
 				<h1 className="p-4"> You must be logged in to view this page </h1>
 			)}
-			{/* Display savedpokemon data */}
-			{savedPokemon.map((pokemon) => (
-				<p key={pokemon.id}>{pokemon.name}</p>
-			))}
+			<div className="flex align-items">
+				{savedPokemon.map((pokemon) => (
+					<div key={pokemon.id}>
+						<div>
+							<Image src={pokemon.image} width={100} height={100} />
+							<p>{pokemon.name}</p>
+						</div>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
