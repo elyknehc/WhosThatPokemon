@@ -36,9 +36,6 @@ const PokemonCard = ({ filter }) => {
 			console.log(error);
 		}
 	};
-	//Read item from DB
-
-	//Delete item from DB
 
 	const handleGetPokemon = async () => {
 		setLoading(true);
@@ -62,6 +59,7 @@ const PokemonCard = ({ filter }) => {
 
 	const handleCorrectGuess = async () => {
 		setCorrect(true);
+		setScore(score + 1);
 		await handleModal();
 		setTimeout(() => {
 			handleGetPokemon();
@@ -69,6 +67,7 @@ const PokemonCard = ({ filter }) => {
 	};
 
 	const handleWrongGuess = async () => {
+		setScore(0);
 		setCorrect(false);
 		await handleModal();
 		setTimeout(() => {
@@ -127,7 +126,7 @@ const PokemonCard = ({ filter }) => {
 							<div>
 								<button onClick={addItem}> Save Pokemon </button>
 							</div>
-							<div> {score} </div>
+							<div> Streak : {score} </div>
 						</div>
 					)}
 				</div>
