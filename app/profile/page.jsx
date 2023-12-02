@@ -8,14 +8,26 @@ import {
 	query,
 	where,
 	onSnapshot,
+	doc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Image from "next/image";
+import PokemonItem from "../components/PokemonItem";
 
 const page = () => {
 	const { user } = UserAuth();
 	const [loading, setLoading] = useState(true);
 	const [savedPokemon, setSavedPokemon] = useState([]);
+
+	const deletePokemon = async (id) => {
+		try {
+			const docRef = doc(db, "savedPokemon", id);
+			await deleteDoc(docRef);
+		} catch (error) {
+			console.error("Error deleting Pokemon:", error);
+		}
+		setSavedPokemon(savedPokemon.filter((pokemon) => pokemon.id !== id));
+	};
 
 	useEffect(() => {
 		const checkAuthentication = async () => {
@@ -27,22 +39,28 @@ const page = () => {
 
 	useEffect(() => {
 		const fetchSavedPokemon = async () => {
-			const q = query(
-				collection(db, "savedPokemon")
-				// where("user", "==", user.uid)
-			);
-			const unsubscribe = onSnapshot(q, (querySnapshot) => {
-				const pokemon = [];
-				querySnapshot.forEach((doc) => {
-					pokemon.push(doc.data());
-				});
-				setSavedPokemon(pokemon);
-			});
-			return unsubscribe;
+			try {
+				if (user) {
+					const q = query(
+						collection(db, "savedPokemon"),
+						where("user", "==", user.uid)
+					);
+					const unsubscribe = onSnapshot(q, (querySnapshot) => {
+						const pokemon = [];
+						querySnapshot.forEach((doc) => {
+							pokemon.push(doc.data());
+						});
+						setSavedPokemon(pokemon);
+					});
+					return unsubscribe;
+				}
+			} catch (error) {
+				console.error("Error fetching saved Pokemon:", error);
+			}
 		};
 
 		fetchSavedPokemon();
-	}, [user]);
+	}, [savedPokemon]);
 
 	return (
 		<div>
@@ -55,12 +73,12 @@ const page = () => {
 			)}
 			<div className="flex align-items">
 				{savedPokemon.map((pokemon) => (
-					<div key={pokemon.id}>
-						<div>
-							<Image src={pokemon.image} width={100} height={100} />
-							<p>{pokemon.name}</p>
-						</div>
-					</div>
+					<PokemonItem
+						key={pokemon.id}
+						name={pokemon.name}
+						image={pokemon.image}
+						deletePokemon={deletePokemon}
+					/>
 				))}
 			</div>
 		</div>
