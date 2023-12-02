@@ -9,6 +9,7 @@ import {
 	where,
 	onSnapshot,
 	doc,
+	delteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Image from "next/image";
@@ -23,10 +24,10 @@ const page = () => {
 		try {
 			const docRef = doc(db, "savedPokemon", id);
 			await deleteDoc(docRef);
+			setSavedPokemon(savedPokemon.filter((pokemon) => pokemon.id !== id));
 		} catch (error) {
 			console.error("Error deleting Pokemon:", error);
 		}
-		setSavedPokemon(savedPokemon.filter((pokemon) => pokemon.id !== id));
 	};
 
 	useEffect(() => {

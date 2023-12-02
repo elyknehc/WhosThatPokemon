@@ -2,8 +2,6 @@ import React from "react";
 import Image from "next/image";
 
 const PokemonItem = ({ key, name, image, deletePokemon }) => {
-	//Delete Pokemon
-
 	return (
 		<div>
 			<div>
