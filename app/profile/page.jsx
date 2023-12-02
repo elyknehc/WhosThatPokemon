@@ -61,27 +61,29 @@ const page = () => {
 		};
 
 		fetchSavedPokemon();
-	}, [savedPokemon]);
+	}, [user, savedPokemon]);
 
 	return (
 		<div>
 			{loading ? (
 				<p> Loading...</p>
 			) : user ? (
-				<h1 className="p-4"> Welcome, {user.displayName} </h1>
+				<h1 className="p-4">
+					Welcome, {user.displayName}
+					<div className="flex align-items">
+						{savedPokemon.map((pokemon) => (
+							<PokemonItem
+								key={pokemon.id}
+								name={pokemon.name}
+								image={pokemon.image}
+								deletePokemon={deletePokemon}
+							/>
+						))}
+					</div>
+				</h1>
 			) : (
 				<h1 className="p-4"> You must be logged in to view this page </h1>
 			)}
-			<div className="flex align-items">
-				{savedPokemon.map((pokemon) => (
-					<PokemonItem
-						key={pokemon.id}
-						name={pokemon.name}
-						image={pokemon.image}
-						deletePokemon={deletePokemon}
-					/>
-				))}
-			</div>
 		</div>
 	);
 };
