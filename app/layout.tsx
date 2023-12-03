@@ -14,7 +14,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<title> Who's That Pokémon? </title>
-			<link rel="icon" href="/favicon/Pokeball.ico" />
+			<link rel="icon" href="/favicon.ico" sizes="any" />
 			<body className={inter.className}>
 				<AuthContextProvider>
 					<Navbar />
