@@ -79,13 +79,15 @@ const page = () => {
 				</div>
 			) : user ? (
 				<h1 className="p-4">
-					<div className="flex align-items">
+					<div className="flex flex-wrap">
 						{savedPokemon.map((pokemon) => (
-							<div className="p-3">
+							<div className="p-3 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
 								<PokemonItem
 									key={pokemon.id}
 									id={pokemon.id}
-									name={pokemon.name}
+									name={
+										<span className="font-bold capitalize">{pokemon.name}</span>
+									}
 									image={pokemon.image}
 									deletePokemon={deletePokemon}
 								/>

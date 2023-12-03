@@ -21,7 +21,7 @@ const Modal = ({ pokemonName, result, pokemonImg2 }) => {
 	}, [countdown]);
 
 	return (
-		<div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
+		<div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50">
 			<div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center w-96 h-96">
 				{result ? (
 					<div className="text-center">

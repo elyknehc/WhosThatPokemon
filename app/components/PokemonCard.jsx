@@ -134,6 +134,9 @@ const PokemonCard = ({ filter }) => {
 								src={pokemonImg}
 								alt="Pokemon"
 								draggable={false}
+								style={{
+									filter: start ? "brightness(100%)" : "brightness(0%)",
+								}}
 							/>
 							<div>
 								<input
