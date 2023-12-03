@@ -8,7 +8,7 @@ export default function Home() {
 	const [filter, setFilter] = useState(null);
 
 	return (
-		<main className="p-4">
+		<main className="p-4 bg-blue-400 h-screen">
 			<div className="flex justify-center text-center">
 				<div>
 					<h1

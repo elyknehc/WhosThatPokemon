@@ -78,16 +78,14 @@ const page = () => {
 					/>
 				</div>
 			) : user ? (
-				<h1 className="p-4">
+				<h1 className="p-4 bg-blue-400 h-screen">
 					<div className="flex flex-wrap">
 						{savedPokemon.map((pokemon) => (
 							<div className="p-3 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
 								<PokemonItem
 									key={pokemon.id}
 									id={pokemon.id}
-									name={
-										<span className="font-bold capitalize">{pokemon.name}</span>
-									}
+									name={<span className="capitalize">{pokemon.name}</span>}
 									image={pokemon.image}
 									deletePokemon={deletePokemon}
 								/>
@@ -96,7 +94,9 @@ const page = () => {
 					</div>
 				</h1>
 			) : (
-				<h1 className="p-4"> You must be logged in to view this page </h1>
+				<h1 className="p-4 bg-blue-300 h-screen">
+					You must be logged in to view this page
+				</h1>
 			)}
 		</div>
 	);
