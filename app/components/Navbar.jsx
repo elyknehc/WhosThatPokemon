@@ -32,34 +32,39 @@ const Navbar = () => {
 	}, [user]);
 
 	return (
-		<div className="h-20 w-full border-b-2 flex items-center justify-between p-2">
+		<div className="h-20 w-full border-b-2 flex items-center justify-between p-2 bg-gray-200">
 			<ul className="flex">
 				<li className="mr-6">
 					<Link href="/">Home</Link>
 				</li>
 				<li className="mr-6">
-					<Link
-						href="/profile
-					"
-					>
-						Saved Pokemon
-					</Link>
+					{user && (
+						<li className="mr-6">
+							<Link href="/profile">Saved Pokemon</Link>
+						</li>
+					)}
 				</li>
 			</ul>
 
 			{loading ? null : !user ? (
 				<ul className="flex">
-					<li onClick={handleSignIn} className="p-2 cursor-pointer">
+					<li
+						onClick={handleSignIn}
+						className="p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2"
+					>
 						Login
 					</li>
-					<li onClick={handleSignIn} className="p-2 cursor-pointer">
+					<li
+						onClick={handleSignIn}
+						className="p-2 cursor-pointer bg-blue-500 text-white rounded-md"
+					>
 						Sign up
 					</li>
 				</ul>
 			) : (
 				<div>
-					<p>Welcome, {user.displayName}</p>
-					<p className="cursor-pointer" onClick={handleSignOut}>
+					<p className="text-gray-600">Welcome, {user.displayName}</p>
+					<p className="cursor-pointer text-blue-500" onClick={handleSignOut}>
 						Sign out
 					</p>
 				</div>

@@ -3,15 +3,16 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Pokeball from "./Pokeball.jpg";
+import loadingGif from "./loading.gif";
 import getPokemon from "../api/pokemon";
 import Modal from "./Modal";
 import {
 	collection,
 	addDoc,
-	getDoc,
+	getDocs,
+	query,
+	where,
 	doc,
-	setDoc,
-	DocumentReference,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
@@ -31,14 +32,25 @@ const PokemonCard = ({ filter }) => {
 
 	//Add item to DB
 	const addItem = async (e) => {
+		if (!user) {
+			alert("Please sign in to save Pokemon!");
+			return;
+		}
 		e.preventDefault();
 		try {
-			const docRef = doc(db, "savedPokemon", user.uid + pokemonName);
-			const docSnap = await getDoc(docRef);
-			if (docSnap.exists()) {
-				console.log("Duplicate ID, item not added to the database.");
+			// Check if the pokemon name already exists for the user
+			const querySnapshot = await getDocs(
+				query(
+					collection(db, "savedPokemon"),
+					where("name", "==", pokemonName),
+					where("user", "==", user.uid)
+				)
+			);
+			if (!querySnapshot.empty) {
+				alert("You already have this Pokemon saved!");
 				return;
 			}
+
 			// Add the current pokemon name and image to the database associated with the user's ID
 			const newDocRef = await addDoc(collection(db, "savedPokemon"), {
 				name: pokemonName,
@@ -104,13 +116,25 @@ const PokemonCard = ({ filter }) => {
 					/>
 				) : null}
 				{loading ? (
-					<div>
-						<h1> Loading... </h1>
+					<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
+						<Image
+							height={500}
+							width={500}
+							src={loadingGif}
+							alt="Loading"
+							draggable={false}
+						/>
 					</div>
 				) : (
 					<div>
 						<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
-							<Image height={500} width={500} src={pokemonImg} alt="Pokemon" />
+							<Image
+								height={500}
+								width={500}
+								src={pokemonImg}
+								alt="Pokemon"
+								draggable={false}
+							/>
 							<div>
 								<input
 									type="text"
@@ -129,16 +153,37 @@ const PokemonCard = ({ filter }) => {
 
 				<div>
 					{start ? (
-						<button onClick={handleStart}> Start Game </button>
+						<div className="p-3">
+							<button
+								onClick={handleStart}
+								className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+							>
+								Start Game
+							</button>
+						</div>
 					) : (
 						<div>
-							<div>
-								<button onClick={handleWrongGuess}> Reveal Answer </button>
+							<div className="p-3 flex justify-center ">
+								<div>
+									<button
+										onClick={handleWrongGuess}
+										className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+									>
+										Reveal Answer
+									</button>
+								</div>
+								<div>
+									<button
+										onClick={addItem}
+										className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+									>
+										Save Pokemon
+									</button>
+								</div>
 							</div>
-							<div>
-								<button onClick={addItem}> Save Pokemon </button>
+							<div className="text-center text-xl font-bold mt-4">
+								Streak: {score}
 							</div>
-							<div> Streak : {score} </div>
 						</div>
 					)}
 				</div>

@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
+import loadingGif from "../components/loading.gif";
 import {
 	collection,
 	getDoc,
@@ -67,19 +68,28 @@ const page = () => {
 	return (
 		<div>
 			{loading ? (
-				<p> Loading...</p>
+				<div className="flex justify-center align-items">
+					<Image
+						height={500}
+						width={500}
+						src={loadingGif}
+						alt="Loading"
+						draggable={false}
+					/>
+				</div>
 			) : user ? (
 				<h1 className="p-4">
-					Welcome, {user.displayName}
 					<div className="flex align-items">
 						{savedPokemon.map((pokemon) => (
-							<PokemonItem
-								key={pokemon.id}
-								id={pokemon.id}
-								name={pokemon.name}
-								image={pokemon.image}
-								deletePokemon={deletePokemon}
-							/>
+							<div className="p-3">
+								<PokemonItem
+									key={pokemon.id}
+									id={pokemon.id}
+									name={pokemon.name}
+									image={pokemon.image}
+									deletePokemon={deletePokemon}
+								/>
+							</div>
 						))}
 					</div>
 				</h1>
