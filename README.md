@@ -9,13 +9,16 @@ Built with Next.js, Firebase and Tailwind.
 
 **Functionalities**
 
-Guessing a Pokemon
+Guessing a Pokemon:
+
 ![image](https://github.com/elyknehc/Pokemon2.0/assets/94413491/4afd42df-1822-4421-9025-020d7c561f15)
 
-Revealing the Answer 
+Revealing the Answer:
+
 ![image](https://github.com/elyknehc/Pokemon2.0/assets/94413491/1e09d317-374a-49f8-a2d7-9129539b8115)
 
-Saving a Pokemon for the future / deleting them
+Saving a Pokemon for the future / deleting them:
+
 ![image](https://github.com/elyknehc/Pokemon2.0/assets/94413491/0ae54cd3-77f5-4c04-a2c6-5d05649906b1)
 
 Streak system to keep track of how many in a row you have guessed correctly.
