@@ -38,6 +38,9 @@ const Navbar = () => {
 					<Link href="/">Home</Link>
 				</li>
 				<li className="mr-6">
+					<Link href="/leaderboards">Leaderboards</Link>
+				</li>
+				<li className="mr-6">
 					{user && (
 						<li className="mr-6">
 							<Link href="/profile">Saved Pokemon</Link>
