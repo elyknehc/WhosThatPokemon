@@ -60,8 +60,10 @@ const Navbar = () => {
 				</ul>
 			) : (
 				<div>
-					<p className="text-gray-600">Welcome, {user.displayName}</p>
-					<p className="cursor-pointer text-blue-500" onClick={handleSignOut}>
+					<p
+						className="p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2"
+						onClick={handleSignOut}
+					>
 						Sign out
 					</p>
 				</div>
