@@ -86,6 +86,7 @@ const page = () => {
 									key={pokemon.id}
 									id={pokemon.id}
 									name={<span className="capitalize">{pokemon.name}</span>}
+									nameText={pokemon.name}
 									image={pokemon.image}
 									deletePokemon={deletePokemon}
 								/>

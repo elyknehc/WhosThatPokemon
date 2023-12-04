@@ -1,10 +1,16 @@
+`use client`;
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const PokemonItem = ({ id, name, image, deletePokemon }) => {
+const PokemonItem = ({ id, name, nameText, image, deletePokemon }) => {
+	const router = useRouter();
 	const handleDelete = () => {
 		deletePokemon(id);
+	};
+
+	const handleClick = () => {
+		router.push(`/pokemon/${nameText}`);
 	};
 
 	return (
@@ -17,15 +23,16 @@ const PokemonItem = ({ id, name, image, deletePokemon }) => {
 					>
 						Delete
 					</button>
-
-					<Image
-						src={image}
-						width={100}
-						height={100}
-						alt="Pokemon Image"
-						className="mt-4"
-						draggable={false}
-					/>
+					<button className="cursor-pointer" onClick={handleClick}>
+						<Image
+							src={image}
+							width={100}
+							height={100}
+							alt="Pokemon Image"
+							className="mt-4"
+							draggable={false}
+						/>
+					</button>
 
 					<p className="mt-2">{name}</p>
 				</div>
