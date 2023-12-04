@@ -38,7 +38,7 @@ const Navbar = () => {
 					<Link href="/">Home</Link>
 				</li>
 				<li className="mr-6">
-					<Link href="/leaderboards">Leaderboards</Link>
+					<Link href="/leaderboards">Leaderboard</Link>
 				</li>
 				<li className="mr-6">
 					{user && (
@@ -56,12 +56,6 @@ const Navbar = () => {
 						className="p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2"
 					>
 						Login
-					</li>
-					<li
-						onClick={handleSignIn}
-						className="p-2 cursor-pointer bg-blue-500 text-white rounded-md"
-					>
-						Sign up
 					</li>
 				</ul>
 			) : (
