@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const PokemonItem = ({ id, name, image, deletePokemon }) => {
 	const handleDelete = () => {
@@ -16,6 +17,7 @@ const PokemonItem = ({ id, name, image, deletePokemon }) => {
 					>
 						Delete
 					</button>
+
 					<Image
 						src={image}
 						width={100}
@@ -24,6 +26,7 @@ const PokemonItem = ({ id, name, image, deletePokemon }) => {
 						className="mt-4"
 						draggable={false}
 					/>
+
 					<p className="mt-2">{name}</p>
 				</div>
 			</div>

@@ -27,6 +27,32 @@ const PokemonCard = ({ filter }) => {
 	const [score, setScore] = useState(0);
 	const [start, setStart] = useState(true);
 
+	useEffect(() => {
+		if (score > 0) {
+			console.log("Score is greater than 0");
+			const checkHighestScore = async () => {
+				try {
+					const querySnapshot = await getDocs(
+						query(
+							collection(db, "userScores"),
+							where("user", "==", user.uid),
+							where("score", ">", score)
+						)
+					);
+					if (querySnapshot.empty) {
+						await addDoc(collection(db, "userScores"), {
+							user: user.uid,
+							score: score,
+						});
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			};
+			checkHighestScore();
+		}
+	}, [score]);
+
 	//Auth
 	const { user } = UserAuth();
 
