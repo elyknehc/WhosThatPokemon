@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { UserAuth } from "../context/AuthContext";
-import { useState, useEffect } from "react";
 
 const Navbar = () => {
 	const { user, googleSignIn, logOut } = UserAuth();
 	const [loading, setLoading] = useState(true);
+	const [isMobile, setIsMobile] = useState(false);
 
 	const handleSignIn = async () => {
 		try {
@@ -31,29 +31,42 @@ const Navbar = () => {
 		checkAuthentication();
 	}, [user]);
 
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+
+		handleResize();
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
 	return (
 		<div className="h-20 w-full border-b-2 flex items-center justify-between p-2 bg-gray-200">
-			<ul className="flex">
-				<li className="mr-6">
+			<ul className={`flex ${isMobile ? "flex-col" : ""}`}>
+				<li className={`mr-6 ${isMobile ? "mb-2" : ""}`}>
 					<Link href="/">Home</Link>
 				</li>
-				<li className="mr-6">
+				<li className={`mr-6 ${isMobile ? "mb-2" : ""}`}>
 					<Link href="/leaderboards">Leaderboard</Link>
 				</li>
-				<li className="mr-6">
-					{user && (
-						<li className="mr-6">
-							<Link href="/profile">Saved Pokemon</Link>
-						</li>
-					)}
-				</li>
+				{user && (
+					<li className={`mr-6 ${isMobile ? "mb-2" : ""}`}>
+						<Link href="/profile">Saved Pokemon</Link>
+					</li>
+				)}
 			</ul>
 
 			{loading ? null : !user ? (
-				<ul className="flex">
+				<ul className={`flex ${isMobile ? "flex-col" : ""}`}>
 					<li
 						onClick={handleSignIn}
-						className="p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2"
+						className={`p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2 ${
+							isMobile ? "mb-2" : ""
+						}`}
 					>
 						Login
 					</li>
@@ -61,7 +74,9 @@ const Navbar = () => {
 			) : (
 				<div>
 					<p
-						className="p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2"
+						className={`p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2 ${
+							isMobile ? "mb-2" : ""
+						}`}
 						onClick={handleSignOut}
 					>
 						Sign out
