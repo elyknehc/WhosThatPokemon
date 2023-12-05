@@ -29,8 +29,9 @@ const page = ({ params }) => {
 
 	return (
 		//Make a component probably
+
 		loading ? (
-			<div className="flex justify-center items-center">
+			<div className="bg-blue-400 h-screen flex justify-center items-center">
 				<Image src={loadingGif} alt="Loading" />
 			</div>
 		) : (
@@ -40,6 +41,8 @@ const page = ({ params }) => {
 					types={data.type}
 					abilities={data.abilities}
 					stats={data.stats}
+					moves={data.moves}
+					sprite={data.sprites.other["official-artwork"].front_default}
 				/>
 			</div>
 		)
