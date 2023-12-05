@@ -47,14 +47,14 @@ const Navbar = () => {
 	return (
 		<div className="h-20 w-full border-b-2 flex items-center justify-between p-2 bg-gray-200">
 			<ul className={`flex ${isMobile ? "flex-col" : ""}`}>
-				<li className={`mr-6 ${isMobile ? "mb-2" : ""}`}>
+				<li className={`mr-6`}>
 					<Link href="/">Home</Link>
 				</li>
-				<li className={`mr-6 ${isMobile ? "mb-2" : ""}`}>
+				<li className={`mr-6`}>
 					<Link href="/leaderboards">Leaderboard</Link>
 				</li>
 				{user && (
-					<li className={`mr-6 ${isMobile ? "mb-2" : ""}`}>
+					<li className={`mr-6`}>
 						<Link href="/profile">Saved Pokemon</Link>
 					</li>
 				)}
@@ -74,10 +74,10 @@ const Navbar = () => {
 			) : (
 				<div>
 					<p
+						onClick={handleSignOut}
 						className={`p-2 cursor-pointer bg-blue-500 text-white rounded-md mr-2 ${
 							isMobile ? "mb-2" : ""
 						}`}
-						onClick={handleSignOut}
 					>
 						Sign out
 					</p>
