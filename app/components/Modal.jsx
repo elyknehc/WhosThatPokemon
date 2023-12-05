@@ -56,6 +56,7 @@ const Modal = ({ pokemonName, result, pokemonImg2 }) => {
 					height={150}
 					alt="pkmn"
 					draggable={false}
+					loading="eager"
 				/>
 				New Pokemon in {countdown} seconds...
 			</div>

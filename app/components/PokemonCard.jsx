@@ -149,6 +149,7 @@ const PokemonCard = ({ filter }) => {
 							src={loadingGif}
 							alt="Loading"
 							draggable={false}
+							loading="eager"
 						/>
 					</div>
 				) : (
