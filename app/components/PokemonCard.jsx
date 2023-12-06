@@ -140,6 +140,9 @@ const PokemonCard = ({ filter }) => {
 			const querySnapshot = await getDocs(
 				query(collection(db, "userScores"), where("user", "==", user.uid))
 			);
+			if (querySnapshot.empty) {
+				return;
+			}
 			setPokemonGuessed(querySnapshot.docs[0].data().score);
 		};
 		getPokemonGuessed();
