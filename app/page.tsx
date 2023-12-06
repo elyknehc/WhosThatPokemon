@@ -11,19 +11,11 @@ export default function Home() {
 		<main className="p-4 bg-blue-400 h-screen">
 			<div className="flex justify-center text-center">
 				<div>
-					<h1
-						style={{
-							fontFamily: "Arial",
-							fontSize: "24px",
-							fontWeight: "bold",
-						}}
-					>
-						Who's that Pokemon?
-					</h1>
-					<div>
+					<h1 className="font-bold mb-4">Who's that Pokemon?</h1>
+					<div className="mb-2">
 						<Filter setFilter={setFilter} />
-						<PokemonCard filter={filter} />
 					</div>
+					<PokemonCard filter={filter} />
 				</div>
 			</div>
 		</main>
