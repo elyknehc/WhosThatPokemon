@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default async function getPokemon(filter) {
-	const randomNumber = Math.floor(Math.random() * 1000) + 1;
+	const randomNumber = Math.floor(Math.random() * 1015) + 1;
 	filter = randomNumber;
 	try {
 		const response = await axios.get(
