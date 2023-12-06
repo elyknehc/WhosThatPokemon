@@ -9,7 +9,7 @@ const Filter = ({ setFilter }) => {
 	};
 
 	return (
-		<div className="relative inline-block text-left">
+		<div className="relative inline-block text-left" style={{ zIndex: 999 }}>
 			<div>
 				<button
 					type="button"

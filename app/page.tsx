@@ -20,7 +20,7 @@ export default function Home() {
 					>
 						Who's that Pokemon?
 					</h1>
-					<div className="flex">
+					<div>
 						<Filter setFilter={setFilter} />
 						<PokemonCard filter={filter} />
 					</div>
