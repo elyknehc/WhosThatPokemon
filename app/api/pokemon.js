@@ -10,7 +10,7 @@ export default async function getPokemon(filter) {
 		filter = Math.floor(Math.random() * 151) + 1;
 	}
 	if (filter === 2) {
-		filter = Math.floor(Math.random() * (251 - 152 + 1)) + 152;
+		filter = Math.floor(Math.random() * (251 - 151)) + 151;
 	}
 	if (filter === 3) {
 		filter = Math.floor(Math.random() * (386 - 251)) + 251;
@@ -30,6 +30,9 @@ export default async function getPokemon(filter) {
 	if (filter === 8) {
 		filter = Math.floor(Math.random() * (905 - 721)) + 721;
 	}
+	// if (filter === 9) {
+	// 	filter = Math.floor(Math.random() * (1015 - 905)) + 1015;
+	// }
 
 	try {
 		const response = await axios.get(
