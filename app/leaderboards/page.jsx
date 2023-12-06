@@ -15,7 +15,7 @@ const getScores = async () => {
 	const querySnapshot = await getDocs(query(collection(db, "userScores")));
 	const scores = querySnapshot.docs.map((doc) => doc.data());
 	scores.sort((a, b) => b.score - a.score); // Sort scores in descending order
-	return scores;
+	return scores.slice(0, 10); // Return only the first 10 scores
 };
 
 const page = () => {
