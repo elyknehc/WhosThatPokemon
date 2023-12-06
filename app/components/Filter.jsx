@@ -4,9 +4,6 @@ const Filter = ({ setFilter }) => {
 	const handleGenerationClick = (generation) => {
 		alert("Generation " + generation + " Selected");
 		setFilter(generation);
-
-		setSelectedGeneration(generation);
-		setFilter(selectedGeneration);
 	};
 
 	return (
