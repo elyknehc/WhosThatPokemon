@@ -13,6 +13,7 @@ import {
 	query,
 	where,
 	doc,
+	updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
@@ -26,32 +27,6 @@ const PokemonCard = ({ filter }) => {
 	const [correct, setCorrect] = useState(null);
 	const [score, setScore] = useState(0);
 	const [start, setStart] = useState(true);
-
-	useEffect(() => {
-		if (score > 0) {
-			console.log("Score is greater than 0");
-			const checkHighestScore = async () => {
-				try {
-					const querySnapshot = await getDocs(
-						query(
-							collection(db, "userScores"),
-							where("user", "==", user.uid),
-							where("score", ">", score)
-						)
-					);
-					if (querySnapshot.empty) {
-						await addDoc(collection(db, "userScores"), {
-							user: user.uid,
-							score: score,
-						});
-					}
-				} catch (error) {
-					console.log(error);
-				}
-			};
-			checkHighestScore();
-		}
-	}, [score]);
 
 	//Auth
 	const { user } = UserAuth();
@@ -88,6 +63,8 @@ const PokemonCard = ({ filter }) => {
 		}
 	};
 
+	const updateUserScores = async () => {};
+
 	const handleGetPokemon = async () => {
 		setLoading(true);
 		try {
@@ -111,6 +88,7 @@ const PokemonCard = ({ filter }) => {
 	const handleCorrectGuess = async () => {
 		setCorrect(true);
 		setScore(score + 1);
+		await updateUserScores();
 		await handleModal();
 		setTimeout(() => {
 			handleGetPokemon();
@@ -169,7 +147,7 @@ const PokemonCard = ({ filter }) => {
 								<input
 									type="text"
 									placeholder="Guess the Pokemon!"
-									className="text-center"
+									className="text-center border border-gray-300 rounded"
 									onChange={(e) =>
 										e.target.value.toLowerCase() === pokemonName
 											? handleCorrectGuess()

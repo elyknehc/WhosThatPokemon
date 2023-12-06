@@ -11,7 +11,11 @@ import { auth } from "../firebase";
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const googleSignIn = () => {
-		signInWithPopup(auth, new GoogleAuthProvider());
+		try {
+			signInWithPopup(auth, new GoogleAuthProvider());
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const logOut = () => {
