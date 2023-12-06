@@ -90,7 +90,7 @@ const PokemonCard = ({ filter }) => {
 	const handleGetPokemon = async () => {
 		setLoading(true);
 		try {
-			const pokemon = await getPokemon();
+			const pokemon = await getPokemon(filter);
 			setPokemonImg(pokemon[1]);
 			setPokemonImg2(pokemon[2]);
 			setPokemonName(pokemon[0]);
