@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 
 const Filter = ({ setFilter }) => {
-	const [selectedGeneration, setSelectedGeneration] = useState(null);
-
 	const handleGenerationClick = (generation) => {
+
+		alert("Generation " + generation + " Selected");
+		setFilter(generation);
+
 		setSelectedGeneration(generation);
 		setFilter(selectedGeneration);
+
 	};
 
 	return (
@@ -58,6 +61,13 @@ const Filter = ({ setFilter }) => {
 			>
 				Generation 8
 			</button>
+			<button
+				className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded"
+				onClick={() => handleGenerationClick(null)}
+			>
+				Deselect All Filters
+			</button>
+
 		</div>
 	);
 };
