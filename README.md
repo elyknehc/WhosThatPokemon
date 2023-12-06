@@ -31,7 +31,7 @@ Streak system to keep track of how many in a row you have guessed correctly and 
 
 Leaderboards of top 10 players:
 
-![image](https://github.com/elyknehc/WhosThatPokemon/assets/94413491/177b08e0-323e-4d3e-9eb1-575e6fa27319)
+![image](https://github.com/elyknehc/WhosThatPokemon/assets/94413491/4dc2de1f-b475-4afc-a025-449e53c9a19a)
 
 **Future Steps**
 
