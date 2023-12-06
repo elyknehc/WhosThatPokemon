@@ -28,6 +28,7 @@ const PokemonCard = ({ filter }) => {
 	const [correct, setCorrect] = useState(null);
 	const [score, setScore] = useState(0);
 	const [start, setStart] = useState(true);
+	const [pokemonGuessed, setPokemonGuessed] = useState(0);
 
 	//Auth
 	const { user } = UserAuth();
@@ -75,6 +76,7 @@ const PokemonCard = ({ filter }) => {
 			const newDocRef = await addDoc(collection(db, "userScores"), {
 				score: 1,
 				user: user.uid,
+				userName: user.displayName,
 			});
 		} else {
 			// Increment the score by 1
@@ -128,6 +130,20 @@ const PokemonCard = ({ filter }) => {
 		setStart(false);
 		handleGetPokemon();
 	};
+
+	useEffect(() => {
+		// Get the total number of pokemon guessed by the user
+		const getPokemonGuessed = async () => {
+			if (!user) {
+				return;
+			}
+			const querySnapshot = await getDocs(
+				query(collection(db, "userScores"), where("user", "==", user.uid))
+			);
+			setPokemonGuessed(querySnapshot.docs[0].data().score);
+		};
+		getPokemonGuessed();
+	}, [pokemonImg]);
 
 	return (
 		<div>
@@ -209,15 +225,15 @@ const PokemonCard = ({ filter }) => {
 									</button>
 								</div>
 							</div>
-							<div className="text-center text-xl font-bold mt-4">
-								Streak: {score}
-							</div>
 							<div>
 								{user ? (
 									<div className="text-center text-xl font-bold mt-4">
-										Total Pokemon Guessed :
+										Total Pokemon Guessed : {pokemonGuessed}
 									</div>
 								) : null}
+							</div>
+							<div className="text-center text-xl font-bold mt-4">
+								Streak: {score}
 							</div>
 						</div>
 					)}
