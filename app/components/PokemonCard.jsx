@@ -212,6 +212,7 @@ const PokemonCard = ({ filter }) => {
 							</div>
 							<div className="text-center text-xl font-bold mt-4">
 								Streak: {score}
+								<div>filfter: {filter}</div>
 							</div>
 						</div>
 					)}
