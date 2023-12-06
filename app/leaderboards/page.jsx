@@ -33,7 +33,7 @@ const page = () => {
 	return (
 		<div className="bg-blue-400 h-screen">
 			<div className="flex items-center justify-center h-screen">
-				<div className="bg-white p-4 rounded shadow">
+				<div className="bg-white p-12 rounded shadow">
 					<h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
 					{scores.map((score, idx) => (
 						<div
