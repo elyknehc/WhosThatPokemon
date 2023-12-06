@@ -2,8 +2,13 @@ import React, { useState } from "react";
 
 const Filter = ({ setFilter }) => {
 	const handleGenerationClick = (generation) => {
-		alert("Generation " + generation + " selected");
+
+		alert("Generation " + generation + " Selected");
 		setFilter(generation);
+
+		setSelectedGeneration(generation);
+		setFilter(selectedGeneration);
+
 	};
 
 	return (
@@ -62,6 +67,7 @@ const Filter = ({ setFilter }) => {
 			>
 				Deselect All Filters
 			</button>
+
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default async function getPokemon(filter) {
+
 	if (!filter) {
 		const randomNumber = Math.floor(Math.random() * 1000) + 1;
 		filter = randomNumber;
@@ -30,6 +31,10 @@ export default async function getPokemon(filter) {
 	if (filter === 8) {
 		filter = Math.floor(Math.random() * (905 - 721)) + 721;
 	}
+  
+	const randomNumber = Math.floor(Math.random() * 1015) + 1;
+	filter = randomNumber;
+
 	try {
 		const response = await axios.get(
 			`https://pokeapi.co/api/v2/pokemon/${filter}`

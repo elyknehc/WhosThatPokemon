@@ -13,6 +13,8 @@ import {
 	query,
 	where,
 	doc,
+	updateDoc,
+	increment,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
@@ -26,32 +28,7 @@ const PokemonCard = ({ filter }) => {
 	const [correct, setCorrect] = useState(null);
 	const [score, setScore] = useState(0);
 	const [start, setStart] = useState(true);
-
-	useEffect(() => {
-		if (score > 0) {
-			console.log("Score is greater than 0");
-			const checkHighestScore = async () => {
-				try {
-					const querySnapshot = await getDocs(
-						query(
-							collection(db, "userScores"),
-							where("user", "==", user.uid),
-							where("score", ">", score)
-						)
-					);
-					if (querySnapshot.empty) {
-						await addDoc(collection(db, "userScores"), {
-							user: user.uid,
-							score: score,
-						});
-					}
-				} catch (error) {
-					console.log(error);
-				}
-			};
-			checkHighestScore();
-		}
-	}, [score]);
+	const [pokemonGuessed, setPokemonGuessed] = useState(0);
 
 	//Auth
 	const { user } = UserAuth();
@@ -88,6 +65,28 @@ const PokemonCard = ({ filter }) => {
 		}
 	};
 
+	const updateUserScores = async () => {
+		if (!user) {
+			return;
+		}
+		const querySnapshot = await getDocs(
+			query(collection(db, "userScores"), where("user", "==", user.uid))
+		);
+		if (querySnapshot.empty) {
+			const newDocRef = await addDoc(collection(db, "userScores"), {
+				score: 1,
+				user: user.uid,
+				userName: user.displayName,
+			});
+		} else {
+			// Increment the score by 1
+			const docRef = doc(db, "userScores", querySnapshot.docs[0].id);
+			await updateDoc(docRef, {
+				score: increment(1),
+			});
+		}
+	};
+
 	const handleGetPokemon = async () => {
 		setLoading(true);
 		try {
@@ -111,6 +110,7 @@ const PokemonCard = ({ filter }) => {
 	const handleCorrectGuess = async () => {
 		setCorrect(true);
 		setScore(score + 1);
+		updateUserScores();
 		await handleModal();
 		setTimeout(() => {
 			handleGetPokemon();
@@ -131,6 +131,23 @@ const PokemonCard = ({ filter }) => {
 		handleGetPokemon();
 	};
 
+	useEffect(() => {
+		// Get the total number of pokemon guessed by the user
+		const getPokemonGuessed = async () => {
+			if (!user) {
+				return;
+			}
+			const querySnapshot = await getDocs(
+				query(collection(db, "userScores"), where("user", "==", user.uid))
+			);
+			if (querySnapshot.empty) {
+				return;
+			}
+			setPokemonGuessed(querySnapshot.docs[0].data().score);
+		};
+		getPokemonGuessed();
+	}, [pokemonImg]);
+
 	return (
 		<div>
 			<div>
@@ -149,6 +166,7 @@ const PokemonCard = ({ filter }) => {
 							src={loadingGif}
 							alt="Loading"
 							draggable={false}
+							loading="eager"
 						/>
 					</div>
 				) : (
@@ -168,7 +186,7 @@ const PokemonCard = ({ filter }) => {
 								<input
 									type="text"
 									placeholder="Guess the Pokemon!"
-									className="text-center"
+									className="text-center border border-gray-300 rounded"
 									onChange={(e) =>
 										e.target.value.toLowerCase() === pokemonName
 											? handleCorrectGuess()
@@ -209,6 +227,13 @@ const PokemonCard = ({ filter }) => {
 										Save Pokemon
 									</button>
 								</div>
+							</div>
+							<div>
+								{user ? (
+									<div className="text-center text-xl font-bold mt-4">
+										Total Pokemon Guessed : {pokemonGuessed}
+									</div>
+								) : null}
 							</div>
 							<div className="text-center text-xl font-bold mt-4">
 								Streak: {score}

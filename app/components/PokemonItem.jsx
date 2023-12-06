@@ -32,6 +32,7 @@ const PokemonItem = ({ id, name, nameText, image, deletePokemon }) => {
 						alt="Pokemon Image"
 						className="mt-4"
 						draggable={false}
+						loading="eager"
 					/>
 
 					<p className="mt-2">{name}</p>
