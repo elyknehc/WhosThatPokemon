@@ -11,7 +11,7 @@ export default function Home() {
 		<main className="p-4 bg-blue-400 h-screen">
 			<div className="flex justify-center text-center">
 				<div>
-					<h1 className="font-bold mb-4">Who's that Pokemon?</h1>
+					<h1 className="font-bold mb-2">Who's that Pokemon?</h1>
 					<div className="mb-2">
 						<Filter setFilter={setFilter} />
 					</div>

@@ -161,8 +161,8 @@ const PokemonCard = ({ filter }) => {
 				{loading ? (
 					<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
 						<Image
-							height={500}
-							width={500}
+							height={450}
+							width={450}
 							src={loadingGif}
 							alt="Loading"
 							draggable={false}
@@ -173,8 +173,8 @@ const PokemonCard = ({ filter }) => {
 					<div>
 						<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
 							<Image
-								height={500}
-								width={500}
+								height={450}
+								width={450}
 								src={pokemonImg}
 								alt="Pokemon"
 								draggable={false}
