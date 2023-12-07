@@ -20,7 +20,9 @@ import { db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
 
 const PokemonCard = ({ filter }) => {
-	const [pokemonImg, setPokemonImg] = useState(Pokeball); // Default Image will be a pokeball
+	const [pokemonImg, setPokemonImg] = useState(
+		"https://i.etsystatic.com/33357979/r/il/e1dfcd/3584257734/il_794xN.3584257734_bfy9.jpg"
+	); // Default Image will be a pokeball
 	const [pokemonImg2, setPokemonImg2] = useState(null);
 	const [pokemonName, setPokemonName] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -172,7 +174,7 @@ const PokemonCard = ({ filter }) => {
 				) : (
 					<div>
 						<div className="card bg-white rounded-lg shadow-lg p-4 flex flex-col items-center ">
-							<Image
+							<img
 								height={450}
 								width={450}
 								src={pokemonImg}
@@ -182,6 +184,7 @@ const PokemonCard = ({ filter }) => {
 									filter: start ? "brightness(100%)" : "brightness(0%)",
 								}}
 							/>
+
 							<div>
 								<input
 									type="text"

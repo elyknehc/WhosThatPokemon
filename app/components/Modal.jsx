@@ -50,13 +50,12 @@ const Modal = ({ pokemonName, result, pokemonImg2 }) => {
 						</h1>
 					</div>
 				)}
-				<Image
+				<img
 					src={pokemonImg2}
 					width={150}
 					height={150}
 					alt="pkmn"
 					draggable={false}
-					loading="eager"
 				/>
 				New Pokemon in {countdown} seconds...
 			</div>

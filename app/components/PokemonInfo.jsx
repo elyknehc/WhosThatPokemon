@@ -5,14 +5,8 @@ import { Progress } from "@/components/ui/progress";
 const PokemonInfo = ({ name, types, abilities, stats, moves, sprite }) => {
 	return (
 		<div className="bg-blue-400 flex flex-col items-center min-h-screen">
-			<Image
-				draggable={false}
-				src={sprite}
-				width={400}
-				height={400}
-				priority
-				loading="eager"
-			/>
+			<img src={sprite} width={400} height={400} alt="pkmn" draggable={false} />
+
 			<h1 className="text-3xl"> {name}</h1>
 
 			<div className="flex-col">
