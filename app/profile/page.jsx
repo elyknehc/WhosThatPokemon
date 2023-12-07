@@ -68,7 +68,7 @@ const page = () => {
 	return (
 		<div>
 			{loading ? (
-				<div className="flex justify-center align-items">
+				<div className="bg-blue-400 flex justify-center align-items min-h-screen">
 					<Image
 						height={500}
 						width={500}
@@ -95,7 +95,7 @@ const page = () => {
 					</div>
 				</h1>
 			) : (
-				<h1 className="p-4 bg-blue-300 h-screen">
+				<h1 className="p-4 bg-blue-400 min-h-screen">
 					You must be logged in to view this page
 				</h1>
 			)}

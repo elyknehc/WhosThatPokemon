@@ -22,17 +22,13 @@ const PokemonItem = ({ id, name, nameText, image, deletePokemon }) => {
 					>
 						Delete
 					</button>
-
-					<Image
-						onClick={handleClick}
-						style={{ cursor: "pointer" }}
+					<img
 						src={image}
 						width={100}
 						height={100}
 						alt="Pokemon Image"
 						className="mt-4"
 						draggable={false}
-						loading="eager"
 					/>
 
 					<p className="mt-2">{name}</p>
