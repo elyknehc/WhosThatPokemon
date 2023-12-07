@@ -27,8 +27,9 @@ const PokemonItem = ({ id, name, nameText, image, deletePokemon }) => {
 						width={100}
 						height={100}
 						alt="Pokemon Image"
-						className="mt-4"
+						className="mt-4 cursor-pointer"
 						draggable={false}
+						onClick={handleClick}
 					/>
 
 					<p className="mt-2">{name}</p>
