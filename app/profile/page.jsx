@@ -20,6 +20,8 @@ const page = () => {
 	const { user } = UserAuth();
 	const [loading, setLoading] = useState(true);
 	const [savedPokemon, setSavedPokemon] = useState([]);
+	const [searchTerm, setSearchTerm] = useState("");
+	const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
 	const deletePokemon = async (id) => {
 		try {
@@ -65,6 +67,24 @@ const page = () => {
 		fetchSavedPokemon();
 	}, [user, savedPokemon]);
 
+	useEffect(() => {
+		const timerId = setTimeout(() => {
+			setDebouncedSearchTerm(searchTerm);
+		}, 250);
+
+		return () => {
+			clearTimeout(timerId);
+		};
+	}, [searchTerm]);
+
+	const handleSearch = (event) => {
+		setSearchTerm(event.target.value);
+	};
+
+	const filteredPokemon = savedPokemon.filter((pokemon) =>
+		pokemon.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+	);
+
 	return (
 		<div>
 			{loading ? (
@@ -79,8 +99,17 @@ const page = () => {
 				</div>
 			) : user ? (
 				<h1 className="p-4 bg-blue-400 min-h-screen">
+					<div className="p-4 bg-blue-400 flex justify-center">
+						<input
+							type="text"
+							placeholder="Search Saved Pokemon"
+							value={searchTerm}
+							onChange={handleSearch}
+							className="p-2 rounded"
+						/>
+					</div>
 					<div className="flex flex-wrap">
-						{savedPokemon.map((pokemon) => (
+						{filteredPokemon.map((pokemon) => (
 							<div className="p-3 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
 								<PokemonItem
 									key={pokemon.id}
